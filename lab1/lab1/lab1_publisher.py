@@ -26,6 +26,8 @@ class MinimalPublisher(Node):
         msg = Twist()
         parameters = {parameter: self_get_parameter(parameter).get_parameter_value()
             .string_value for parameter in ['up', 'down', 'left', 'right']}
+        vel_ang = 1.0
+        vel_lin = 1.0
         key = stdscr.getkey()
 
         if(self.left == key):
@@ -41,7 +43,7 @@ class MinimalPublisher(Node):
             msg.linear.x = -vel_lin
             self.get_logger().info('Going backward')
         else:
-            print("Start moving by pressing one of keys: a d w s)
+            print("Start moving by pressing one of keys: a d w s")
 
         self.publisher_.publish(msg)
 
