@@ -23,7 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'lab1_publisher = lab1.lab1.lab1_publisher:main'
+            'lab1_publisher = lab1.lab1_publisher:main'
         ],
     },
 )

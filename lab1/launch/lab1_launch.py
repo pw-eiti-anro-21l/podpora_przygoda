@@ -13,6 +13,7 @@ def generate_launch_description():
 			package='lab1',
 			executable='lab1_publisher',
 			name='lab1_publisher',
+			prefix=["gnome-terminal ", "-- "],
 			parameters=[{
 				'up': 'w',
 				'down': 's',

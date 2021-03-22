@@ -5,13 +5,15 @@
   <version>0.0.0</version>
   <description>Laboratorium 1</description>
   <maintainer email="paulina.podpora.stud@pw.edu.pl">paulina</maintainer>
-  <license>Apache 2.0</license>
+  <license>Apache License 2.0</license>
 
-  <depend>rclpy</depend> 
+
+  <exec_depend>rclpy</exec_depend> 
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>sys</exec_depend>
-  <exec_depend>os</exec_depend>
+  <exec_depend>curses</exec_depend>
   <exec_depend>glob</exec_depend>
+  <exec_depend>os</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
