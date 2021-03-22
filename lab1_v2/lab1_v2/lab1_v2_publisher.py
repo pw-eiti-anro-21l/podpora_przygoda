@@ -2,6 +2,8 @@ import rclpy
 import sys
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
+from rclpy.exceptions import ParameterNotDeclaredException
+from rcl_interfaces.msg import ParameterType
 
 class MinimalPublisher(Node):
 
@@ -44,11 +46,6 @@ class MinimalPublisher(Node):
         self.right = right
         self.up = up
         self.down = down
-        #curses.nocbreak()
-        #stdscr.keypad(0)
-        #curses.echo()
-        #curses.endwin()
-
 
 def main(args=None):
     rclpy.init(args=args)

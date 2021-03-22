@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import setup
 
-package_name = 'lab1'
+package_name = 'lab1_v2'
 
 setup(
     name=package_name,
@@ -23,7 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'lab1_publisher = lab1.lab1_publisher:main'
+            'lab1_v2_publisher = lab1_v2.lab1_v2_publisher:main'
         ],
     },
 )
