@@ -10,15 +10,16 @@ def generate_launch_description():
 			name='sim'
 		),
 		Node(
-			package='lab1',
-			executable='lab1_publisher',
-			name='lab1_publisher',
-			prefix=['gnome-terminal --'],
-			parameters=[{
+			package='lab1_v2',
+			executable='lab1_v2_publisher',
+			name='lab1_v2_publisher',
+			prefix= ['gnome-terminal --'],
+			parameters= [
+			{
 				'up': 'w',
 				'down': 's',
 				'left': 'a',
-				'right': 'd' 
+				'right': 'd', 
 			}]
 		)
 

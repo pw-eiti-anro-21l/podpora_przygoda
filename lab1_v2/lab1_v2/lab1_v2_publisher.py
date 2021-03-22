@@ -1,5 +1,6 @@
 import rclpy
 import sys
+import getch
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from rclpy.exceptions import ParameterNotDeclaredException
