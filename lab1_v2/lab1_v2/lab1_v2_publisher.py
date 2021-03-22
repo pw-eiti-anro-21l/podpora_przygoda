@@ -36,8 +36,6 @@ class MinimalPublisher(Node):
             right: [-1*vel_ang, 0]
         }
         user_input = getch.getch()
-        if len(user_input) == 0 or not self.correct_key(user_input):
-            return
 
         msg.angular.z = float(self.key_mapping[user_input[0]][0])
         msg.linear.x = float(self.key_mapping[user_input[0]][1])
