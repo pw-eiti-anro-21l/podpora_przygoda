@@ -1,0 +1,21 @@
+[0.333s] Invoking command in '/home/paulina/dev_ws/src/podpora_przygoda/lab1': PYTHONPATH=/home/paulina/dev_ws/src/podpora_przygoda/install/lab1/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/lab1 build --build-base /home/paulina/dev_ws/src/podpora_przygoda/build/lab1/build install --prefix /home/paulina/dev_ws/src/podpora_przygoda/install/lab1 --record /home/paulina/dev_ws/src/podpora_przygoda/build/lab1/install.log --single-version-externally-managed
+[0.611s] running egg_info
+[0.612s] writing ../build/lab1/lab1.egg-info/PKG-INFO
+[0.612s] writing dependency_links to ../build/lab1/lab1.egg-info/dependency_links.txt
+[0.612s] writing entry points to ../build/lab1/lab1.egg-info/entry_points.txt
+[0.613s] writing requirements to ../build/lab1/lab1.egg-info/requires.txt
+[0.613s] writing top-level names to ../build/lab1/lab1.egg-info/top_level.txt
+[0.658s] reading manifest file '../build/lab1/lab1.egg-info/SOURCES.txt'
+[0.659s] writing manifest file '../build/lab1/lab1.egg-info/SOURCES.txt'
+[0.660s] running build
+[0.660s] running build_py
+[0.660s] running install
+[0.661s] running install_lib
+[0.663s] running install_data
+[0.663s] running install_egg_info
+[0.665s] removing '/home/paulina/dev_ws/src/podpora_przygoda/install/lab1/lib/python3.8/site-packages/lab1-0.0.0-py3.8.egg-info' (and everything under it)
+[0.666s] Copying ../build/lab1/lab1.egg-info to /home/paulina/dev_ws/src/podpora_przygoda/install/lab1/lib/python3.8/site-packages/lab1-0.0.0-py3.8.egg-info
+[0.667s] running install_scripts
+[0.688s] Installing lab1_publisher script to /home/paulina/dev_ws/src/podpora_przygoda/install/lab1/lib/lab1
+[0.689s] writing list of installed files to '/home/paulina/dev_ws/src/podpora_przygoda/build/lab1/install.log'
+[0.722s] Invoked command in '/home/paulina/dev_ws/src/podpora_przygoda/lab1' returned '0': PYTHONPATH=/home/paulina/dev_ws/src/podpora_przygoda/install/lab1/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/lab1 build --build-base /home/paulina/dev_ws/src/podpora_przygoda/build/lab1/build install --prefix /home/paulina/dev_ws/src/podpora_przygoda/install/lab1 --record /home/paulina/dev_ws/src/podpora_przygoda/build/lab1/install.log --single-version-externally-managed
