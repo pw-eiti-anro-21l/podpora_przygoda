@@ -1,3 +1,0 @@
-[console_scripts]
-lab1_publisher = lab1.lab1_publisher:main
-
