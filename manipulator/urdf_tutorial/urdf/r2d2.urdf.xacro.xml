@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+
+<robot name="r2r2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="l_width" value="2" />
+<xacro:property name="params" value="${load_yaml('urdf.yaml')}"/>
+
+
+  <link name="link_base">
+        <visual>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.5"/>
+          <material name=/>
+            <geometry>
+                <box size="0.25 0.25 1"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="link1_base" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="${params['i1']['rpy']}" xyz="${params['i1']['xyz']}"/>
+        <parent link="base_link"/>
+        <child link="link1"/>
+    </joint>
+
+    <link name="link1">
+        <visual>
+            <origin rpy="${params['i1']['link_rpy']}" xyz="${params['i1']['link_xyz']}"/>
+          <material name=/>
+            <geometry>
+                <cylinder radius="0.1" length="${params['i1']['link_lenght']}"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="i2">
+        <visual>
+            <origin rpy="${params['i2']['link_rpy']}" xyz="${params['i2']['link_xyz']}"/>
+          <material/>
+            <geometry>
+                <cylinder radius="0.1" length="${params['i2']['link_lenght']}"/>
+            </geometry>
+        </visual>
+    </link>
+
+
+
+    <joint name="link1__link2" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="${params['i2']['rpy']}" xyz="${params['i2']['xyz']}"/>
+        <parent link="link1"/>
+        <child link="link2"/>
+    </joint>
+
+    <link name="link3">
+        <visual>
+            <origin rpy="${params['i3']['link_rpy']}" xyz="${params['i3']['link_xyz']}"/>
+          <material name="green"/>
+            <geometry>
+                <cylinder radius="0.1" length="${params['i3']['link_len']}"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="link2__link3" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="${params['i3']['rpy']}" xyz="${params['i3']['xyz']}"/>
+        <parent link="link2"/>
+        <child link="link3"/>
+    </joint>
+
+    <link name="tool">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+          <material/>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="link3__tool" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="link3"/>
+        <child link="tool"/>
+    </joint>
+</robot>
