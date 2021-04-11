@@ -32,7 +32,7 @@
         </visual>
     </link>
 
-    <link name="i2">
+    <link name="link2">
         <visual>
             <origin rpy="${params['i2']['link_rpy']}" xyz="${params['i2']['link_xyz']}"/>
           <material/>
