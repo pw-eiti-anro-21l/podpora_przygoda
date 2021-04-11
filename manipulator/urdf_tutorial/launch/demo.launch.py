@@ -10,9 +10,13 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     urdf_file_name = 'r2d2.urdf.xacro.xml'
+    rviz_file_name = 'r2d2.rviz'
     urdf = os.path.join(
         get_package_share_directory('urdf_tutorial'),
         urdf_file_name)
+    rviz = os.path.join(
+        get_package_share_directory('urdf_tutorial'),
+        rviz_file_name)
     with open(urdf, 'r') as infp:
         robot_desc = infp.read()
 
@@ -24,13 +28,15 @@ def generate_launch_description():
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
-            name='robot_state_publisher',
+            name='robot_state_publisher_robot',
             output='screen',
             parameters=[{'use_sim_time': use_sim_time, 'robot_description': Command(['xacro', ' ', urdf])
             }]),
-#        Node
-#            package='manip',
-#            executable='state_publisher',
-#            name='state_publisher',
-#            output='screen'),
+        Node
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time}]
+            arguments=['-d', rviz]),
     ])
