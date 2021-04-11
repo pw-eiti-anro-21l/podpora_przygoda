@@ -4,7 +4,7 @@
     <xacro:property name="l_width" value="2" />
 <xacro:property name="params" value="${load_yaml('urdf.yaml')}"/>
 
-    <material name="red">
+  <material name="red">
         <color rgba="1 0 0 1"/>
     </material>
 
@@ -27,8 +27,9 @@
         </visual>
     </link>
 
-    <joint name="link_base_1" type="fixed">
+    <joint name="link_base_1" type="prismatic">
         <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-0.2" upper="0" velocity="0.5" />
         <origin rpy="${params['i1']['joint_rpy']}" xyz="${params['i1']['joint_xyz']}"/>
         <parent link="base_link"/>
         <child link="link1"/>
@@ -56,8 +57,9 @@
 
 
 
-    <joint name="link_1_2" type="fixed">
+    <joint name="link_1_2" type="revolute">
         <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
         <origin rpy="${params['i2']['joint_rpy']}" xyz="${params['i2']['joint_xyz']}"/>
         <parent link="link1"/>
         <child link="link2"/>
@@ -73,8 +75,9 @@
         </visual>
     </link>
 
-    <joint name="link_2_3" type="fixed">
+    <joint name="link_2_3" type="prismatic">
         <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-0.2" upper="0" velocity="0.5" />
         <origin rpy="${params['i3']['joint_rpy']}" xyz="${params['i3']['joint_xyz']}"/>
         <parent link="link2"/>
         <child link="link3"/>
@@ -90,8 +93,9 @@
         </visual>
     </link>
     
-    <joint name="link_3_4" type="fixed">
+    <joint name="link_3_4" type="revolute">
         <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-1.56" upper="1.56" velocity="0.5" />
         <origin rpy="${params['i4']['joint_rpy']}" xyz="${params['i4']['joint_xyz']}"/>
         <parent link="link3"/>
         <child link="link4"/>
