@@ -8,10 +8,13 @@
   <link name="link_base">
         <visual>
             <origin rpy="0 0 0" xyz="0.0 0.0 0.5"/>
-          <material name=/>
+            
             <geometry>
                 <box size="0.25 0.25 1"/>
             </geometry>
+            <material name= "gray">
+                <color rgba=".2 .2 .2 1" />
+            <material>
         </visual>
     </link>
 
@@ -25,20 +28,24 @@
     <link name="link1">
         <visual>
             <origin rpy="${params['i1']['link_rpy']}" xyz="${params['i1']['link_xyz']}"/>
-          <material name=/>
             <geometry>
                 <cylinder radius="0.1" length="${params['i1']['link_lenght']}"/>
             </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
         </visual>
     </link>
 
     <link name="link2">
         <visual>
             <origin rpy="${params['i2']['link_rpy']}" xyz="${params['i2']['link_xyz']}"/>
-          <material/>
             <geometry>
                 <cylinder radius="0.1" length="${params['i2']['link_lenght']}"/>
             </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </materials>
         </visual>
     </link>
 
@@ -54,10 +61,12 @@
     <link name="link3">
         <visual>
             <origin rpy="${params['i3']['link_rpy']}" xyz="${params['i3']['link_xyz']}"/>
-          <material name="green"/>
             <geometry>
                 <cylinder radius="0.1" length="${params['i3']['link_len']}"/>
             </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </materials>
         </visual>
     </link>
 
@@ -71,10 +80,12 @@
     <link name="tool">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
-          <material/>
             <geometry>
                 <box size="0.1 0.1 0.1"/>
             </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </materials>
         </visual>
     </link>
 
