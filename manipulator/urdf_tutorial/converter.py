@@ -31,7 +31,7 @@ with open('urdf/urdf.yaml','w') as file:
 		rot_z = mathutils.Matrix.Rotation(theta,4, 'Z')
 		trans_z = mathutils.Matrix.Translation((0,0,d))
 
-		dh = trans_x @ rot_x @ rot_z @ trans_z
+		dh = rot_x @ trans_x @ rot_z @ trans_z
 		rpy = dh.to_euler()
 		xyz = dh.to_translation()
 		
