@@ -75,9 +75,8 @@
         </visual>
     </link>
 
-    <joint name="link_2_3" type="prismatic">
+    <joint name="link_2_3" type="fixed">
         <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-0.2" upper="0" velocity="0.5" />
         <origin rpy="${params['i3']['joint_rpy']}" xyz="${params['i3']['joint_xyz']}"/>
         <parent link="link2"/>
         <child link="link3"/>
