@@ -40,12 +40,8 @@ with open('urdf/urdf.yaml','w') as file:
 			
 
 		file.write(key + ":\n")
-		if key=="i1" or key=="i2" or key=="i4":
+		if key=="i1" or key=="i2":
 			xyz[2]=xyz[2]+len
-		if key=="i3":
-			rpy[1]=rpy[1]+angle
-		if key=="i4":
-			rpy[1]=rpy[1]-angle
 
 		file.write(" joint_xyz: {} {} {}\n".format(*xyz))
 		file.write(" joint_rpy: {} {} {}\n".format(*rpy))
