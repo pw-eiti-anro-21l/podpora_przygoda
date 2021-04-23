@@ -75,31 +75,14 @@
         </visual>
     </link>
 
-    <joint name="link_2_3" type="prismatic">
+    <joint name="link_2_3" type="revolute">
         <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-0.2" upper="0" velocity="0.5" />
+        <limit effort="1000.0" lower="-1.56" upper="1.56" velocity="0.5" />
         <origin rpy="${params['i3']['joint_rpy']}" xyz="${params['i3']['joint_xyz']}"/>
         <parent link="link2"/>
         <child link="link3"/>
     </joint>
-    
-    <link name="link4">
-        <visual>
-            <origin rpy="${params['i4']['link_rpy']}" xyz="${params['i4']['link_xyz']}"/>
-          <material name="yellow"/>
-            <geometry>
-                <cylinder radius="${params['i4']['radius']}" length="${params['i4']['link_length']}"/>
-            </geometry>
-        </visual>
-    </link>
-    
-    <joint name="link_3_4" type="revolute">
-        <axis xyz="0 0 1" />
-        <limit effort="1000.0" lower="-1.56" upper="1.56" velocity="0.5" />
-        <origin rpy="${params['i4']['joint_rpy']}" xyz="${params['i4']['joint_xyz']}"/>
-        <parent link="link3"/>
-        <child link="link4"/>
-    </joint>
+
 
     <link name="tool">
         <visual>
@@ -111,10 +94,10 @@
         </visual>
     </link>
 
-    <joint name="link_4_tool" type="fixed">
+    <joint name="link_3_tool" type="fixed">
         <axis xyz="0 0 1" />
         <origin rpy="0 0 0" xyz="0.1 0 0"/>
-        <parent link="link4"/>
+        <parent link="link3"/>
         <child link="tool"/>
     </joint>
 </robot>

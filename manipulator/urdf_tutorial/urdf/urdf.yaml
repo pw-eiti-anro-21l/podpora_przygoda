@@ -14,15 +14,8 @@ i2:
  radius: 0.1 
 i3:
  joint_xyz: 0.20000000298023224 0.0 0.0
- joint_rpy: 0.0 1.559999942779541 0.0
+ joint_rpy: 0.0 -0.0 1.559999704360962
  link_xyz: 0 0 0 
  link_rpy: 0 0 0 
  link_length: 0.2 
  radius: 0.05 
-i4:
- joint_xyz: 0.0 0.0 0.20000000298023224
- joint_rpy: 0.0 -1.559999942779541 0.0
- link_xyz: 0 0 0 
- link_rpy: 0 0 0 
- link_length: 0.2 
- radius: 0.1 
