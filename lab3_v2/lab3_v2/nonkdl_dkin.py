@@ -34,11 +34,17 @@ class NONKDL_DKIN(Node):
             d = float(d)
             alpha = float(alpha)
             theta = float(theta)
+            if i==0:
+                d += msg.position[i]
+            if i==1:
+                theta += msg.position[i]
+            if i==2:
+                theta +=msg.position[i]
 
             rot_x = mathutils.Matrix.Rotation(alpha, 4, 'X')
             trans_x = mathutils.Matrix.Translation((a, 0, 0))
             rot_z = mathutils.Matrix.Rotation(theta, 4, 'Z')
-            trans_z = mathutils.Matrix.Translation((0, 0, d + msg.position[i]))
+            trans_z = mathutils.Matrix.Translation((0, 0, d))
 
             dh = rot_x @ trans_x @ rot_z @ trans_z
             T.append(dh)
