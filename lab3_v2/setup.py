@@ -15,9 +15,8 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name), glob('launch/*.py')),
         (os.path.join('share', package_name), glob('urdf/*')),
-        (os.path.join('share', package_name), glob('lab3_v2/*')),
-        (os.path.join('share', package_name), glob('*.json')),
-
+        (os.path.join('share', package_name), glob('urdf/*.rviz')),
+        (os.path.join('share', package_name), glob('*.json'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,

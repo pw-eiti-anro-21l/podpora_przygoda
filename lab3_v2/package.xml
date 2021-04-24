@@ -7,6 +7,8 @@
   <maintainer email="ania@example.com">anna</maintainer>
   <license>Apache License 2.0</license>
 
+  <depend>rclpy</depend>
+
   <export>
     <build_type>ament_python</build_type>
   </export>
