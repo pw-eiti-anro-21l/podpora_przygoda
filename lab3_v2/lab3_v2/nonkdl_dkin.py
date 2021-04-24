@@ -67,8 +67,8 @@ class NONKDL_DKIN(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = NONKDL_DKIN()
-    rclpy.spin(node)
+    nonkdl = NONKDL_DKIN()
+    rclpy.spin(nonkdl)
     node.destroy_node()
     rclpy.shutdown()
 
