@@ -69,7 +69,7 @@ def main(args=None):
     rclpy.init(args=args)
     nonkdl = NONKDL_DKIN()
     rclpy.spin(nonkdl)
-    node.destroy_node()
+    nonkdl.destroy_node()
     rclpy.shutdown()
 
 
