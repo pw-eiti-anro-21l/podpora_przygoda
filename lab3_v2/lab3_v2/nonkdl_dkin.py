@@ -27,7 +27,7 @@ class NONKDL_DKIN(Node):
             params = json.loads(file.read())
 
         i = 1
-        T=[]
+        T = []
         for key in params.keys():
             a, d, alpha, theta = params[key]
             a = float(a)
@@ -38,27 +38,27 @@ class NONKDL_DKIN(Node):
             rot_x = mathutils.Matrix.Rotation(alpha, 4, 'X')
             trans_x = mathutils.Matrix.Translation((a, 0, 0))
             rot_z = mathutils.Matrix.Rotation(theta, 4, 'Z')
-            trans_z = mathutils.Matrix.Translation((0, 0, d+msg.position[i]))
+            trans_z = mathutils.Matrix.Translation((0, 0, d + msg.position[i]))
 
             dh = rot_x @ trans_x @ rot_z @ trans_z
             T.append(dh)
-            i=i+1
+            i = i + 1
 
-        T_k = T[0] @ T[1] @T[2]
+        T_k = T[0] @ T[1] @ T[2]
 
         xyz = T_k.to_translation()
         rpy = T_k.to_euler()
         qua = rpy.to_quaternion()
 
         qos_profile = QoSProfile(depth=10)
-        pose_publisher = self.create_publisher(PoseStamped,'/pose_stamped', qos_profile)
+        pose_publisher = self.create_publisher(PoseStamped, '/pose_stamped', qos_profile)
 
         pose_stamped = PoseStamped()
         t = self.get_clock().now()
         pose_stamped.header.stamp = ROSClock().t().to_msg()
         pose_stamped.header.frame_id = "base_link"
 
-        pose_stamped.pose.position.x = xyz[0]+0.5
+        pose_stamped.pose.position.x = xyz[0] + 0.5
         pose_stamped.pose.position.y = xyz[1]
         pose_stamped.pose.position.z = xyz[2]
         pose_stamped.pose.orientation = Quaternion(w=qua[0], x=qua[1], y=qua[2], z=qua[3])
@@ -71,6 +71,7 @@ def main(args=None):
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

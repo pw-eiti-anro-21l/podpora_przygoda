@@ -18,6 +18,7 @@ def generate_launch_description():
         get_package_share_directory('lab3_v2'),
         rviz_file_name)
 
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
@@ -43,5 +44,5 @@ def generate_launch_description():
         Node(
             package='joint_state_publisher_gui',
             executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui')     
+            name='joint_state_publisher_gui')
     ])
