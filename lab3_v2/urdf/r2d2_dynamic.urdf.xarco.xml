@@ -4,7 +4,7 @@
     <xacro:property name="l_width" value="2" />
 <xacro:property name="params" value="${load_yaml('urdf.yaml')}"/>
 
-    <material name="red">
+  <material name="red">
         <color rgba="1 0 0 1"/>
     </material>
 

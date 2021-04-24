@@ -1,4 +1,3 @@
-
 import os
 from glob import glob
 from setuptools import setup
@@ -23,7 +22,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='anna',
-    maintainer_email='anni@example.com',
+    maintainer_email='ania@example.com',
     description='TODO: Package description',
     license='Apache License 2.0',
     tests_require=['pytest'],
