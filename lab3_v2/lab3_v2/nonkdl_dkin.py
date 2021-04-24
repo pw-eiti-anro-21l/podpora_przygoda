@@ -23,12 +23,12 @@ class NONKDL_DKIN(Node):
         self.subscription
 
     def listener_callback(self, msg):
-        with open('~/dev_ws/src/podpora_przygoda/lab3_v2/DH.json', 'r') as file:
+        with open('DH.json', 'r') as file:
             params = json.loads(file.read())
 
         i = 1
         T = []
-        for key in params.keys():
+        for i,key in enumerate(params.keys()):
             a, d, alpha, theta = params[key]
             a = float(a)
             d = float(d)
@@ -42,7 +42,6 @@ class NONKDL_DKIN(Node):
 
             dh = rot_x @ trans_x @ rot_z @ trans_z
             T.append(dh)
-            i = i + 1
 
         T_k = T[0] @ T[1] @ T[2]
 
@@ -54,15 +53,15 @@ class NONKDL_DKIN(Node):
         pose_publisher = self.create_publisher(PoseStamped, '/pose_stamped', qos_profile)
 
         pose_stamped = PoseStamped()
-        t = self.get_clock().now()
-        pose_stamped.header.stamp = ROSClock().t().to_msg()
+        now = self.get_clock().now()
+        pose_stamped.header.stamp = ROSClock().now().to_msg()
         pose_stamped.header.frame_id = "base_link"
 
-        pose_stamped.pose.position.x = xyz[0] + 0.5
+        pose_stamped.pose.position.x = xyz[0] 
         pose_stamped.pose.position.y = xyz[1]
         pose_stamped.pose.position.z = xyz[2]
         pose_stamped.pose.orientation = Quaternion(w=qua[0], x=qua[1], y=qua[2], z=qua[3])
-        pose_publisher.publish(pose)
+        pose_publisher.publish(pose_stamped)
 
 
 def main(args=None):
