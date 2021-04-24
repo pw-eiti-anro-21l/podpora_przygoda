@@ -9,6 +9,7 @@ Panels:
         - /TF1
         - /RobotModel1
         - /RobotModel1/Description Topic1
+        - /Pose1
       Splitter Ratio: 0.5
     Tree Height: 607
   - Class: rviz_common/Selection
@@ -97,11 +98,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        link4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         tool:
           Alpha: 1
           Show Axes: false
@@ -112,6 +108,25 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz_default_plugins/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.15000000596046448
+      Head Radius: 0.05000000074505806
+      Name: Pose
+      Shaft Length: 0.15000000596046448
+      Shaft Radius: 0.009999999776482582
+      Shape: Arrow
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /pose_stamped
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -170,10 +185,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3397969901561737
+      Pitch: -0.16020283102989197
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.543571949005127
+      Yaw: 4.55856990814209
     Saved: ~
 Window Geometry:
   Displays:

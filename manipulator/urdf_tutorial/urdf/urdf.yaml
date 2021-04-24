@@ -18,4 +18,4 @@ i3:
  link_xyz: 0 0 0 
  link_rpy: 0 0 0 
  link_length: 0.2 
- radius: 0.05 
+ radius: 0.1 

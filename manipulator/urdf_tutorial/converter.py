@@ -35,7 +35,7 @@ with open('urdf/urdf.yaml','w') as file:
 		rpy = dh.to_euler()
 		xyz = dh.to_translation()
 		
-		if key=="i1" or key=="i3":
+		if key=="i1":
 			rad=rad/2
 			
 

@@ -68,7 +68,7 @@
     <link name="link3">
         <visual>
             <origin rpy="${params['i3']['link_rpy']}" xyz="${params['i3']['link_xyz']}"/>
-          <material name="blue"/>
+          <material name="yellow"/>
             <geometry>
                 <cylinder radius="${params['i3']['radius']}" length="${params['i3']['link_length']}"/>
             </geometry>
