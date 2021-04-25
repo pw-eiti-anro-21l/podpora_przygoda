@@ -1,3 +1,0 @@
-[console_scripts]
-nonkdl = lab3_v2.nonkdl_dkin:main
-
