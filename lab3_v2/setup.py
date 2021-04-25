@@ -28,6 +28,7 @@ setup(
     entry_points={
         'console_scripts': [
             'nonkdl = lab3_v2.nonkdl_dkin:main'
+            'kdl = lab3_v2.kdl_dkin:main'
         ],
     },
 )
