@@ -13,7 +13,6 @@ from rclpy.clock import ROSClock
 from PyKDL import *
 import yaml
 
-
 class KDL_DKIN(Node):
 
     def __init__(self):
@@ -61,19 +60,19 @@ class KDL_DKIN(Node):
         qua = frame.M.GetQuaternion()
 
         qos_profile = QoSProfile(depth=10)
-        pose_publisher = self.create_publisher(PoseStamped, '/pose_stamped', qos_profile)
+        pose_publisher = self.create_publisher(PoseStamped, '/pose_stamped_kdl', qos_profile)
 
-        pose_stamped = PoseStamped()
+        pose_stamped_kdl = PoseStamped()
         now = self.get_clock().now()
-        pose_stamped.header.stamp = ROSClock().now().to_msg()
-        pose_stamped.header.frame_id = "base_link"
+        pose_stamped_kdl.header.stamp = ROSClock().now().to_msg()
+        pose_stamped_kdl.header.frame_id = "base_link"
 
-        pose_stamped.pose.position.x = xyz[0]
-        pose_stamped.pose.position.y = xyz[1]
-        pose_stamped.pose.position.z = xyz[2]
-        pose_stamped.pose.orientation = Quaternion(w=float(qua[0]), x=float(qua[1]), y=float(qua[2]), z=float(qua[3]))
+        pose_stamped_kdl.pose.position.x = xyz[0]
+        pose_stamped_kdl.pose.position.y = xyz[1]
+        pose_stamped_kdl.pose.position.z = xyz[2]
+        pose_stamped_kdl.pose.orientation = Quaternion(w=float(qua[3]), x=float(qua[0]), y=float(qua[1]), z=float(qua[2]))
 
-        pose_publisher.publish(pose_stamped)
+        pose_publisher.publish(pose_stamped_kdl)
 
     def create_chain(self, params_float):
         chain = Chain()
@@ -117,14 +116,12 @@ class KDL_DKIN(Node):
 
         return chain
 
-
 def main(args=None):
     rclpy.init(args=args)
     kdl = KDL_DKIN()
     rclpy.spin(kdl)
     kdl.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
