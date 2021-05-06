@@ -55,8 +55,6 @@
         </visual>
     </link>
 
-
-
     <joint name="link_1_2" type="revolute">
         <axis xyz="0 0 1" />
         <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
@@ -67,6 +65,16 @@
 
     <link name="link3">
         <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+          <material name="blue"/>
+            <geometry>
+                <box size="0.2 0.05 0.05"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="link4">
+        <visual>
             <origin rpy="${params['i3']['link_rpy']}" xyz="${params['i3']['link_xyz']}"/>
           <material name="yellow"/>
             <geometry>
@@ -74,15 +82,21 @@
             </geometry>
         </visual>
     </link>
-
-    <joint name="link_2_3" type="revolute">
+    
+    <joint name="link_2_3" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="0 0 0" xyz="0.2 0 0"/>
+        <parent link="link2"/>
+        <child link="link3"/>
+    </joint>
+    
+    <joint name="link_2_4" type="revolute">
         <axis xyz="0 0 1" />
         <limit effort="1000.0" lower="-1.56" upper="1.56" velocity="0.5" />
         <origin rpy="${params['i3']['joint_rpy']}" xyz="${params['i3']['joint_xyz']}"/>
         <parent link="link2"/>
-        <child link="link3"/>
+        <child link="link4"/>
     </joint>
-
 
     <link name="tool">
         <visual>
@@ -94,10 +108,10 @@
         </visual>
     </link>
 
-    <joint name="link_3_tool" type="fixed">
+    <joint name="link_4_tool" type="fixed">
         <axis xyz="0 0 1" />
         <origin rpy="0 0 0" xyz="0.1 0 0"/>
-        <parent link="link3"/>
+        <parent link="link4"/>
         <child link="tool"/>
     </joint>
 </robot>
