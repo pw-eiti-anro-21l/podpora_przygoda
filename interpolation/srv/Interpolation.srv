@@ -1,0 +1,7 @@
+float64 joint1_pose
+float64 joint2_pose
+float64 joint3_pose
+float64 move_time
+string type
+---
+string output
