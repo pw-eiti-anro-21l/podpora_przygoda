@@ -63,7 +63,7 @@ class NONKDL_DKIN(Node):
         pose_stamped.header.stamp = ROSClock().now().to_msg()
         pose_stamped.header.frame_id = "base_link"
 
-        pose_stamped.pose.position.x = xyz[0] - 0.15
+        pose_stamped.pose.position.x = xyz[0] 
         pose_stamped.pose.position.y = xyz[1]
         pose_stamped.pose.position.z = xyz[2] + 0.4
         pose_stamped.pose.orientation = Quaternion(w=qua[0], x=qua[1], y=qua[2], z=qua[3])
