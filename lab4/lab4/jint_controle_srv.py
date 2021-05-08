@@ -18,16 +18,34 @@ from interpolation.srv import Interpolation
 
 class jint_controle_srv(Node):
 
+
     def __init__(self):
+        self.theta= [1, 1, 0]
         super().__init__('jint_controle_srv')
-        self.srv = self.create_service(Interpolation, 'interpolation', self.jint_callback)
+        self.srv = self.create_service(Interpolation,'jint_control_srv', self.jint_callback)
+        qos_profile = QoSProfile(depth=10)
+        self.publisher = self.create_publisher(JointState, 'joint_interpolate', qos_profile)
+        self.start_position = [0,0,0]
+        self.subscriber = self.create_subscription(JointState, 'joint_states',self.listener_callback, 10)
+        self.in_action = False
+
+    def listener_callback(self, msg):
+        #pobieranie aktualnych położeń stawów
+        if not self.in_action:
+            self.start_position[0] = msg.position[0]
+            self.start_position[1] = msg.position[1]
+            self.start_position[2] = msg.position[2]
 
     def jint_callback(self, request, response):
-        start_position = [0, 0, 0]
+        self.in_action = True
+
         #pobieranie aktualnych położeń stawów
-       
+
         sample_time = 0.1
         number_of_steps = math.floor(request.move_time / sample_time)
+        joint_states = JointState()
+        joint_states.name = ['joint_base_element1', 'joint_element1_element2', 'joint_element2_element3']
+        start_position = self.start_position
 
         markerArray = MarkerArray()
         qos_profile = QoSProfile(depth=10)
@@ -64,8 +82,6 @@ class jint_controle_srv(Node):
             a3[3] = -2 * ((request.joint3_pose - start_position[2]) / t ** 3)
 
         for i in range(1, number_of_steps + 1):
-            qos_profile2 = QoSProfile(depth=10)
-            self.joint_pub = self.create_publisher(JointState, '/joint_states', qos_profile2)
             joint_states = JointState()
             joint_states.name = ['link_base_1', 'link_1_2', 'link_2_4']
 
@@ -87,7 +103,8 @@ class jint_controle_srv(Node):
             marker.pose.position.z = float(joint1_next)
 
             joint_states.position = [float(joint1_next), float(joint2_next), float(joint3_next)]
-            start_position = [joint1_next, joint2_next, joint3_next]
+            self.publisher.publish(joint_states)
+            time.sleep(sample_time)
 
             markerArray.markers.append(marker)
 
@@ -100,7 +117,9 @@ class jint_controle_srv(Node):
             self.joint_pub.publish(joint_states)
             time.sleep(sample_time)
 
+        self.start_positon = [joint1_next, joint2_next, joint3_next]
         response.output = "Interpolation completed"
+        self.in_action = False
         return response
 
 
