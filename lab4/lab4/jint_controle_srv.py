@@ -39,12 +39,21 @@ class jint_controle_srv(Node):
     def jint_callback(self, request, response):
         self.in_action = True
 
+        self.interpolation(request)
+
+        response.output = "Interpolation completed"
+        self.in_action = False
+        return response
+
+    def interpolation(self, request):
+
         #pobieranie aktualnych położeń stawów
 
         sample_time = 0.1
         number_of_steps = math.floor(request.move_time / sample_time)
         joint_states = JointState()
-        joint_states.name = ['joint_base_element1', 'joint_element1_element2', 'joint_element2_element3']
+        #te nazwy idk czy tak powinny byc
+        joint_states.name = ['joint_base_1', 'joint_1_2', 'joint_2_3']
         start_position = self.start_position
 
         markerArray = MarkerArray()
@@ -65,7 +74,9 @@ class jint_controle_srv(Node):
         (marker.color.a, marker.color.r, marker.color.g, marker.color.b) = (0.5, 1.0, 1.0, 1.0)
         (marker.pose.orientation.w, marker.pose.orientation.x, marker.pose.orientation.y, marker.pose.orientation.z) = (
             1.0, 1.0, 1.0, 1.0)
+
         t = request.move_time
+
         if request.type == 'polynomial':
             a0 = [start_position[0], start_position[1], start_position[2]]
 
@@ -82,15 +93,11 @@ class jint_controle_srv(Node):
             a3[2] = -2 * ((request.joint3_pose - start_position[2]) / t ** 3)
 
         for i in range(1, number_of_steps + 1):
-            joint_states = JointState()
-            joint_states.name = ['link_base_1', 'link_1_2', 'link_2_4']
 
-            now = self.get_clock().now()
-            joint_states.header.stamp = now.to_msg()
-
-            joint1_next = start_position[0] + ((request.joint1_pose - start_position[0]) / t) * sample_time * i
-            joint2_next = start_position[1] + ((request.joint2_pose - start_position[1]) / t) * sample_time * i
-            joint3_next = start_position[2] + ((request.joint3_pose - start_position[2]) / t) * sample_time * i
+            if request.type == 'linear':
+                joint1_next = start_position[0] + ((request.joint1_pose - start_position[0]) / t) * sample_time * i
+                joint2_next = start_position[1] + ((request.joint2_pose - start_position[1]) / t) * sample_time * i
+                joint3_next = start_position[2] + ((request.joint3_pose - start_position[2]) / t) * sample_time * i
 
             if request.type == 'polynomial':
                 joint1_next = a0[0] + a2[0] * (sample_time * i) ** 2 + a3[0] * (sample_time * i) ** 3
@@ -114,13 +121,8 @@ class jint_controle_srv(Node):
                 id += 1
 
             self.marker_pub.publish(markerArray)
-            self.joint_pub.publish(joint_states)
-            time.sleep(sample_time)
 
         self.start_positon = [joint1_next, joint2_next, joint3_next]
-        response.output = "Interpolation completed"
-        self.in_action = False
-        return response
 
 
 def main(args=None):
