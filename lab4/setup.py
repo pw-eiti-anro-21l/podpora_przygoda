@@ -28,7 +28,9 @@ setup(
     entry_points={
         'console_scripts': [
             'nonkdl = lab4.nonkdl_dkin:main',
-            'kdl = lab4.kdl_dkin:main'
+            'kdl = lab4.kdl_dkin:main',
+            'service = lab4.jint_controle_srv:main',
+            'client = lab4.jint:main',
         ],
     },
 )

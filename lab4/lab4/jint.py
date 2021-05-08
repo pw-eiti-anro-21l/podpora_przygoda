@@ -7,7 +7,7 @@ from rclpy.node import Node
 class jint(Node):
 
     def __init__(self):
-        super().__init__('jint_cli')
+        super().__init__('jint')
         self.cli = self.create_client(Interpolation, 'interpolation')
         while not self.cli.wait_for_service(timeout_sec=2.0):
             self.get_logger().info('service not available, waiting again...')
@@ -18,6 +18,7 @@ class jint(Node):
             self.req.joint1_pose = float(sys.argv[1])
             self.req.joint2_pose = float(sys.argv[2])
             self.req.joint3_pose = float(sys.argv[3])
+            self.req.move_time = float(sys.argv[4])
             self.req.type = sys.argv[5]
             self.future = self.cli.call_async(self.req)
         except ValueError:
@@ -25,7 +26,7 @@ class jint(Node):
             self.req.joint1_pose = -1 #tu zrobic domyslne ustawienia
             self.req.joint2_pose = -1
             self.req.joint3_pose = -1
-            self.req.move_time = f - 1
+            self.req.move_time = -1
             self.req.type = sys.argv[5]
             self.future = self.client.call_async(self.req)
 
