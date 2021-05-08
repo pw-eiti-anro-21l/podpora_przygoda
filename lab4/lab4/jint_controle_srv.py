@@ -53,15 +53,15 @@ class jint_controle_srv(Node):
 
             a1 = [0, 0, 0]
 
-            a2 = []
+            a2 = [0, 0, 0]
             a2[0] = 3 * ((request.joint1_pose - start_position[0]) / t ** 2)
             a2[1] = 3 * ((request.joint2_pose - start_position[1]) / t ** 2)
-            a2[3] = 3 * ((request.joint3_pose - start_position[2]) / t ** 2)
+            a2[2] = 3 * ((request.joint3_pose - start_position[2]) / t ** 2)
 
-            a3 = []
+            a3 = [0, 0, 0]
             a3[0] = -2 * ((request.joint1_pose - start_position[0]) / t ** 3)
             a3[1] = -2 * ((request.joint2_pose - start_position[1]) / t ** 3)
-            a3[3] = -2 * ((request.joint3_pose - start_position[2]) / t ** 3)
+            a3[2] = -2 * ((request.joint3_pose - start_position[2]) / t ** 3)
 
         for i in range(1, number_of_steps + 1):
             qos_profile2 = QoSProfile(depth=10)
