@@ -1,7 +1,7 @@
-float64 joint1_pose
-float64 joint2_pose
-float64 joint3_pose
-float64 move_time
+float64 joint1_goal
+float64 joint2_goal
+float64 joint3_goal
+float64 time_of_move
 string type
 ---
-string output
+string confirmation
