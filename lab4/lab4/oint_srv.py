@@ -104,6 +104,18 @@ class oint_srv(Node):
             if (request.type == 'linear'):
                 self.linear(request)
 
+            pose_publisher_rpy.publish(poses_rpy)
+
+            frame_roll = frame_roll * math.pi / 180
+            frame_pitch = frame_pitch * math.pi / 180
+            frame_yaw = frame_yaw * math.pi / 180
+
+            quaternion = transforms3d.euler.euler2quat(frame_roll, frame_pitch, frame_yaw, axes='sxyz')
+            poses.pose.orientation = Quaternion(w=quaternion[0], x=quaternion[1], y=quaternion[2], z=quaternion[3])
+
+            pose_publisher.publish(poses)
+
+            time.sleep(sample_time)
 
             marker.pose.position.x = poses.pose.position.x
             marker.pose.position.y = poses.pose.position.y
@@ -126,7 +138,6 @@ class oint_srv(Node):
 
     def polynomial(self, request):
 
-
         poses.pose.position.x = a0[0] + a2[0] * (sample_time * i) ** 2 + a3[0] * (sample_time * i) ** 3
         poses.pose.position.y = a0[1] + a2[1] * (sample_time * i) ** 2 + a3[1] * (sample_time * i) ** 3
         poses.pose.position.z = a0[2] + a2[2] * (sample_time * i) ** 2 + a3[2] * (sample_time * i) ** 3
@@ -140,32 +151,9 @@ class oint_srv(Node):
         poses_rpy.pose.position.z = poses.pose.position.z
         poses_rpy.pose.orientation = Quaternion(w= 0.0, x=frame_roll, y=frame_pitch, z=frame_yaw)
 
-        pose_publisher_rpy.publish(poses_rpy)
-
-        frame_roll = frame_roll * math.pi / 180
-        frame_pitch = frame_pitch * math.pi / 180
-        frame_yaw = frame_yaw * math.pi / 180
-
-        quaternion = transforms3d.euler.euler2quat(frame_roll, frame_pitch, frame_yaw, axes='sxyz')
-        poses.pose.orientation = Quaternion(w=quaternion[0], x=quaternion[1], y=quaternion[2], z=quaternion[3])
-
-        pose_publisher.publish(poses)
-
-        time.sleep(sample_time)
 
     def linear(self, request):
 
-        qos_profile = QoSProfile(depth=10)
-        pose_publisher = self.create_publisher(PoseStamped, '/pose_orit', qos_profile)
-        poses = PoseStamped()
-        now = self.get_clock().now()
-        poses.header.stamp = ROSClock().now().to_msg()
-        poses.header.frame_id = "map"
-
-        pose_publisher_rpy = self.create_publisher(PoseStamped, '/orientation', qos_profile)
-        poses_rpy = PoseStamped()
-        poses_rpy.header.stamp = ROSClock().now().to_msg()
-        poses_rpy.header.frame_id = "map"
         poses.pose.position.x = start_positions[0] + ((request.joint1_goal - start_positions[0]) / request.time_of_move) * sample_time * i
         poses.pose.position.y = start_positions[1] + ((request.joint2_goal - start_positions[1]) / request.time_of_move) * sample_time * i
         poses.pose.position.z = start_positions[2] + ((request.joint3_goal - start_positions[2]) / request.time_of_move) * sample_time * i
@@ -178,19 +166,6 @@ class oint_srv(Node):
         poses_rpy.pose.position.y = poses.pose.position.y
         poses_rpy.pose.position.z = poses.pose.position.z
         poses_rpy.pose.orientation = Quaternion(w=0.0, x=frame_roll, y=frame_pitch, z=frame_yaw)
-
-        pose_publisher_rpy.publish(poses_rpy)
-
-        frame_roll = frame_roll * math.pi / 180
-        frame_pitch = frame_pitch * math.pi / 180
-        frame_yaw = frame_yaw * math.pi / 180
-
-        quaternion = transforms3d.euler.euler2quat(frame_roll, frame_pitch, frame_yaw, axes='wxyz') #uwaga!!!!!!!
-        poses.pose.orientation = Quaternion(w=quaternion[0], x=quaternion[1], y=quaternion[2], z=quaternion[3])
-
-        pose_publisher.publish(poses)
-
-        time.sleep(sample_time)
 
 def main(args=None):
     rclpy.init(args=args)
