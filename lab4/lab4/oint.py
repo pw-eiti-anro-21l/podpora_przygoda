@@ -1,80 +1,68 @@
 import sys
-from interpolation.srv import OpInterpolation
+from interpolation.srv import OintInterpolation
 import rclpy
 from rclpy.node import Node
 
 
-class MinimalClientAsync(Node):
+class oint(Node):
 
     def __init__(self):
-        super().__init__('minimal_client_async')
-        self.cli = self.create_client(OpInterpolation, 'interpolacja_op')
+        super().__init__('oint')
+        self.cli = self.create_client(OintInterpolation, 'interpolacja')
         while not self.cli.wait_for_service(timeout_sec=2.0):
-            self.get_logger().info('service not available, waiting again...')
-        self.req = OpInterpolation.Request()
+            self.get_logger().info('service not available, waiting')
+        self.req = OintInterpolation.Request()
 
     def send_request(self):
         try:
-            # Położenia
-            self.req.joint1_goal = float(sys.argv[1])
-            self.req.joint2_goal= float(sys.argv[2])
-            self.req.joint3_goal = float(sys.argv[3])
+            self.req.joint1_pose = float(sys.argv[1])
+            self.req.joint2_pose= float(sys.argv[2])
+            self.req.joint3_pose = float(sys.argv[3])
 
-            # Zadane kąty RPY
-            self.req.roll_goal = float(sys.argv[4])
-            self.req.pitch_goal= float(sys.argv[5])
-            self.req.yaw_goal = float(sys.argv[6])
+            self.req.roll_pose = float(sys.argv[4])
+            self.req.pitch_pose= float(sys.argv[5])
+            self.req.yaw_pose = float(sys.argv[6])
 
-
-            if(float(sys.argv[7])<=0):
-                self.get_logger().info('Niepoprawna wartość czasu')
-                raise ValueError("That is not a positive number!")
-            else:
-                self.req.time_of_move = float(sys.argv[7])
-
-            if(str(sys.argv[8]) !='linear' and str(sys.argv[8]) !='polynomial' ):
-                self.get_logger().info('Zły typ interpolacji ')
-                raise ValueError("That is a wrong type!")
-            else:
-                self.req.type = (sys.argv[8])  
-        except IndexError:
-            print("Niepoprawna liczba parametrów")
-            raise Exception()
+            self.req.time = float(sys.argv[7])
+            self.req.type = (sys.argv[8])
+            self.future = self.cli.call_async(self.req)
         except ValueError:
-            print("Błędne parametry")
-            raise Exception()
-            
-        self.future = self.cli.call_async(self.req)
+            self.get_logger().info('ValueError while passing parameters.')
+            self.req.joint1_pose = 0
+            self.req.joint2_pose = 0
+            self.req.joint3_pose = 0
 
+            self.req.roll_pose = 0
+            self.req.pitch_pose = 0
+            self.req.yaw_pose = 0
+
+            self.req.time = 1
+            self.req.type = (sys.argv[8])
+            self.future = self.cli.call_async(self.req)
 
 
 def main(args=None):
     rclpy.init(args=args)
 
     try:
-
-        minimal_client = MinimalClientAsync()
-        minimal_client.send_request()
+        client = oint()
+        client.send_request()
     except:
-        print("Anulowanie realizacji zapytania")
+        print("Request has been rejected")
     else:
 
-
         while rclpy.ok():
-            rclpy.spin_once(minimal_client)
-            if minimal_client.future.done():
+            rclpy.spin_once(client)
+            if client.future.done():
                 try:
-                    response = minimal_client.future.result()
+                    response = client.future.result()
                 except Exception as e:
-                    minimal_client.get_logger().info(
+                    client.get_logger().info(
                         'Service call failed %r' % (e,))
                 else:
-                    minimal_client.get_logger().info(
-                        'Result of interpolation for positions: x = %d , y = %d , z = %d, roll = %d, pitch = %d, yaw = %d in time %d = %s' %
-                        (minimal_client.req.joint1_goal, minimal_client.req.joint2_goal, minimal_client.req.joint3_goal,minimal_client.req.roll_goal, minimal_client.req.pitch_goal, minimal_client.req.yaw_goal, minimal_client.req.time_of_move, response.confirmation))
                     return
     finally:
-        minimal_client.destroy_node()
+        client.destroy_node()
         rclpy.shutdown()
 
 
