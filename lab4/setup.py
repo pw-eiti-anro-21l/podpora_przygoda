@@ -1,8 +1,8 @@
+from setuptools import setup
 import os
 from glob import glob
 from setuptools import setup
 from setuptools import find_packages
-
 package_name = 'lab4'
 
 setup(
@@ -15,8 +15,8 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name), glob('launch/*.py')),
         (os.path.join('share', package_name), glob('urdf/*')),
-        (os.path.join('share', package_name), glob('urdf/*.rviz')),
-        (os.path.join('share', package_name), glob('*.json'))
+        (os.path.join('share', package_name), glob('lab4/*')),
+        (os.path.join('share', package_name), glob('*.json')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -27,10 +27,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'nonkdl = lab4.nonkdl_dkin:main',
-            'kdl = lab4.kdl_dkin:main',
-            'service = lab4.jint_controle_srv:main',
+            'service = lab4.jint_srv:main',
             'client = lab4.jint:main',
+            'service_oint = lab4.oint_srv:main',
+            'client_oint = lab4.oint:main',
         ],
     },
 )
