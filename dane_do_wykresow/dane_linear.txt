@@ -1,0 +1,464 @@
+header:
+  stamp:
+    sec: 1620637811
+    nanosec: 402164896
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.006666666666666667
+- -0.016666666666666666
+- -0.006666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637811
+    nanosec: 512187384
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.013333333333333334
+- -0.03333333333333333
+- -0.013333333333333334
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637811
+    nanosec: 728043406
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.02666666666666667
+- -0.06666666666666667
+- -0.02666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637811
+    nanosec: 834347151
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.03333333333333333
+- -0.08333333333333333
+- -0.03333333333333333
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637811
+    nanosec: 941554885
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.04
+- -0.1
+- -0.04
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 44005985
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.04666666666666667
+- -0.11666666666666667
+- -0.04666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 148718029
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.05333333333333334
+- -0.13333333333333333
+- -0.05333333333333334
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 253305280
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.060000000000000005
+- -0.15
+- -0.060000000000000005
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 364876220
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.06666666666666667
+- -0.16666666666666666
+- -0.06666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 470264689
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.07333333333333333
+- -0.18333333333333332
+- -0.07333333333333333
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 579622549
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.08
+- -0.2
+- -0.08
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 686319068
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.08666666666666667
+- -0.21666666666666667
+- -0.08666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 802289418
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.09333333333333334
+- -0.23333333333333334
+- -0.09333333333333334
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637812
+    nanosec: 909830970
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.1
+- -0.25
+- -0.1
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 17911646
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.10666666666666667
+- -0.26666666666666666
+- -0.10666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 123072867
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.11333333333333334
+- -0.2833333333333333
+- -0.11333333333333334
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 230909947
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.12000000000000001
+- -0.3
+- -0.12000000000000001
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 338084299
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.12666666666666668
+- -0.31666666666666665
+- -0.12666666666666668
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 447725335
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.13333333333333333
+- -0.3333333333333333
+- -0.13333333333333333
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 561908049
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.14
+- -0.35
+- -0.14
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 683151237
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.14666666666666667
+- -0.36666666666666664
+- -0.14666666666666667
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 789386139
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.15333333333333335
+- -0.3833333333333333
+- -0.15333333333333335
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637813
+    nanosec: 896261193
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.16
+- -0.4
+- -0.16
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637814
+    nanosec: 353297
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.16666666666666669
+- -0.4166666666666667
+- -0.16666666666666669
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637814
+    nanosec: 106502259
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.17333333333333334
+- -0.43333333333333335
+- -0.17333333333333334
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637814
+    nanosec: 225602238
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.18000000000000002
+- -0.45
+- -0.18000000000000002
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637814
+    nanosec: 335876285
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.18666666666666668
+- -0.4666666666666667
+- -0.18666666666666668
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637814
+    nanosec: 440930280
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.19333333333333336
+- -0.48333333333333334
+- -0.19333333333333336
+velocity: []
+effort: []
+---
+header:
+  stamp:
+    sec: 1620637814
+    nanosec: 549163940
+  frame_id: ''
+name:
+- base_link_1
+- link_1_2
+- link_2_3
+position:
+- -0.2
+- -0.5
+- -0.2
+velocity: []
+effort: []
+---
