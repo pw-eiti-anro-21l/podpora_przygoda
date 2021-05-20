@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+
+<robot name="r2d2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="l_width" value="2" />
+<xacro:property name="params" value="${load_yaml('urdf.yaml')}"/>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0 0 1 1"/>
+    </material>
+
+    <material name="yellow">
+        <color rgba="1 1 0 1"/>
+    </material>
+
+
+  <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0.0 0.0 0.1"/>
+          <material name="red"/>
+            <geometry>
+                <box size="0.1 0.1 0.2"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="base_link_1" type="prismatic">
+        <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-0.2" upper="0" velocity="0.5" />
+        <origin rpy="${params['i1']['joint_rpy']}" xyz="${params['i1']['joint_xyz']}"/>
+        <parent link="base_link"/>
+        <child link="link1"/>
+    </joint>
+
+    <link name="link1">
+        <visual>
+            <origin rpy="${params['i1']['link_rpy']}" xyz="${params['i1']['link_xyz']}"/>
+          <material name="blue"/>
+            <geometry>
+                <cylinder radius="${params['i1']['radius']}" length="${params['i1']['link_length']}"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="link2">
+        <visual>
+            <origin rpy="${params['i2']['link_rpy']}" xyz="${params['i2']['link_xyz']}"/>
+          <material name="yellow"/>
+            <geometry>
+                <cylinder radius="${params['i2']['radius']}" length="${params['i2']['link_length']}"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="link_1_2" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
+        <origin rpy="${params['i2']['joint_rpy']}" xyz="${params['i2']['joint_xyz']}"/>
+        <parent link="link1"/>
+        <child link="link2"/>
+    </joint>
+
+    <link name="link3">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+          <material name="blue"/>
+            <geometry>
+                <box size="0.2 0.05 0.05"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="link4">
+        <visual>
+            <origin rpy="${params['i3']['link_rpy']}" xyz="${params['i3']['link_xyz']}"/>
+          <material name="yellow"/>
+            <geometry>
+                <cylinder radius="${params['i3']['radius']}" length="${params['i3']['link_length']}"/>
+            </geometry>
+        </visual>
+    </link>
+    
+    <joint name="added_link" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="0 0 0" xyz="0.2 0 0"/>
+        <parent link="link2"/>
+        <child link="link3"/>
+    </joint>
+    
+    <joint name="link_2_3" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-1.56" upper="1.56" velocity="0.5" />
+        <origin rpy="${params['i3']['joint_rpy']}" xyz="${params['i3']['joint_xyz']}"/>
+        <parent link="link2"/>
+        <child link="link4"/>
+    </joint>
+
+    <link name="tool">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+          <material name="red"/>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="link_3_tool" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin rpy="0 0 0" xyz="0.1 0 0"/>
+        <parent link="link4"/>
+        <child link="tool"/>
+    </joint>
+</robot>
