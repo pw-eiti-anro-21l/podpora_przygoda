@@ -1,0 +1,6 @@
+float64 param_a
+float64 param_b
+string type 
+float64 time_of_move
+---
+string confirmation 
