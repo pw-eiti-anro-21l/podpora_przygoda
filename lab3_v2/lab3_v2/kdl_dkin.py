@@ -24,24 +24,11 @@ class KDL_DKIN(Node):
             self.listener_callback,
             10)
         self.subscription
+        self.params = self.loadYAML()
 
     def listener_callback(self, msg):
-
-        with open('urdf.yaml', 'r') as file:  # na razie tutaj bez sciezki
-            params = yaml.load(file, Loader=yaml.FullLoader)
-
-        params_list = []
-        params_float = []
-        params_list.append(params['i1']['joint_xyz'])
-        params_list.append(params['i1']['joint_rpy'])
-        params_list.append(params['i2']['joint_xyz'])
-        params_list.append(params['i2']['joint_rpy'])
-        params_list.append(params['i3']['joint_xyz'])
-        params_list.append(params['i3']['joint_rpy'])
-
-        for param in params_list:
-            params_split = param.split()
-            params_float.append([float(param_split) for param_split in params_split])
+            
+        params_float = self.params
 
         chain = self.create_chain(params_float)
 
@@ -115,6 +102,23 @@ class KDL_DKIN(Node):
         chain.addSegment(segment_2_3)
 
         return chain
+    def loadYAML():
+        with open('urdf.yaml', 'r') as file:  # na razie tutaj bez sciezki
+                params = yaml.load(file, Loader=yaml.FullLoader)
+        params_list = []
+        params_float = []
+        params_list.append(params['i1']['joint_xyz'])
+        params_list.append(params['i1']['joint_rpy'])
+        params_list.append(params['i2']['joint_xyz'])
+        params_list.append(params['i2']['joint_rpy'])
+        params_list.append(params['i3']['joint_xyz'])
+        params_list.append(params['i3']['joint_rpy'])
+
+        for param in params_list:
+            params_split = param.split()
+            params_float.append([float(param_split) for param_split in params_split])
+        return params_float
+               
 
 def main(args=None):
     rclpy.init(args=args)
