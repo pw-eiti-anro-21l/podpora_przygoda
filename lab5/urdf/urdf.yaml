@@ -1,5 +1,5 @@
 i1:
- joint_xyz: 0.0 0.0 0.30000001192092896
+ joint_xyz: 0.0 0.0 0.2
  joint_rpy: 0.0 -0.0 0.0
  link_xyz: 0 0 0 
  link_rpy: 0 0 0 

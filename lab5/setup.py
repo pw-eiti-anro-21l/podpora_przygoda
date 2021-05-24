@@ -27,10 +27,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'service = lab5.jint_srv:main',
-            'client = lab5.jint:main',
+    
             'service_oint = lab5.oint_srv:main',
             'client_oint = lab5.oint:main',
+            'ikin = lab5.ikin:main'
         ],
     },
 )

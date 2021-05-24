@@ -1,5 +1,5 @@
 import sys
-from interpolation.srv import OintInterpolation
+from interpolation.srv import Inverse
 import rclpy
 from rclpy.node import Node
 
@@ -8,35 +8,37 @@ class oint(Node):
 
     def __init__(self):
         super().__init__('oint')
-        self.cli = self.create_client(OintInterpolation, 'oint_interpolacja')
+        self.cli = self.create_client(Inverse, 'interpolation')
         while not self.cli.wait_for_service(timeout_sec=2.0):
             self.get_logger().info('service not available, waiting again...')
-        self.req = OintInterpolation.Request()
+        self.req = Inverse.Request()
 
 
     def send_request(self):
         try:
-            self.req.joint1_goal = float(sys.argv[1])
-            self.req.joint2_goal= float(sys.argv[2])
-            self.req.joint3_goal = float(sys.argv[3])
+            self.req.initial_x = float(sys.argv[1])
+            self.req.initial_y = float(sys.argv[2])
+            self.req.initial_z = float(sys.argv[3])
+            self.req.time_of_move = float(sys.argv[4])
 
-            self.req.roll_goal = float(sys.argv[4])
-            self.req.pitch_goal= float(sys.argv[5])
-            self.req.yaw_goal = float(sys.argv[6])
-            self.req.time_of_move = float(sys.argv[7])
-            self.req.type = (sys.argv[8]) 
+            self.req.type = sys.argv[5] 
+
+            self.req.param_a= float(sys.argv[6])
+            self.req.param_b = float(sys.argv[7])
+            
+
         except ValueError:
             print("ValeuError while parsing")
 
-            self.req.joint1_goal = -1
-            self.req.joint2_goal= -1
-            self.req.joint3_goal = -1
-
-            self.req.roll_goal = -1
-            self.req.pitch_goal= -1
-            self.req.yaw_goal = -1
+            self.req.initial_x = 1
+            self.req.initial_y = 1
+            self.req.initial_z = 1
             self.req.time_of_move = 1
-            self.req.type = (sys.argv[8]) 
+
+            self.req.type = (sys.argv[5]) 
+
+            self.req.param_a = 1
+            self.req.param_b = 1
             
         self.future = self.cli.call_async(self.req)
 
