@@ -56,25 +56,6 @@ class oint_srv(Node):
         tp = 0.1 
         time_total = request.time_of_move
         steps = math.floor(time_total/tp) 
-
-    
-        # markerArray = MarkerArray()
-        # qos_profile = QoSProfile(depth=10)
-        # self.marker_pub = self.create_publisher(MarkerArray, '/marker_pose', qos_profile)
-        # marker = Marker()
-        # marker.header.frame_id = "/base_link"
-        # marker.id = 0
-        # marker.action = Marker.DELETEALL
-        # markerArray.markers.append(marker)
-
-        # self.marker_pub.publish(markerArray)
-
-        # marker.type = marker.SPHERE
-        # marker.action = marker.ADD
-        # (marker.scale.x,marker.scale.y, marker.scale.z) = (0.02, 0.02, 0.02)
-        # (marker.color.a, marker.color.r, marker.color.g, marker.color.b) = (1.0, 1.0, 0.0, 1.0)
-        # (marker.pose.orientation.w, marker.pose.orientation.x, marker.pose.orientation.y, marker.pose.orientation.z) = (1.0, 1.0, 1.0, 1.0)
-
         
         # Eipsa
         if request.type == 'ellipse':
@@ -95,23 +76,30 @@ class oint_srv(Node):
                     poses.pose.position.x = self.init_pose[0] + request.param_b*math.sin(2 * math.pi * (1/request.time_of_move) * tp * i)
                     pose_publisher.publish(poses)
 
-                    # if(self.count > self.MARKERS_MAX):
-                        
-                    #     markerArray.markers.pop(0)
-
-                    # marker.pose.position.x = poses.pose.position.x
-                    # marker.pose.position.y = poses.pose.position.z
-                    # marker.pose.position.z = poses.pose.position.y
-                    # markerArray.markers.append(marker)
-                    # id = 0
-                    # for m in markerArray.markers:
-                    #     m.id = id
-                    #     id += 1
                     self.count += 1
-                    # self.marker_pub.publish(markerArray)
-
 
                     time.sleep(tp)
+
+        if request.type == 'spiral':
+            while(True):
+
+                for i in range(1,steps+1):
+
+                    qos_profile = QoSProfile(depth=10)
+                    pose_publisher = self.create_publisher(PoseStamped, '/pose_stamped', qos_profile)
+                    poses = PoseStamped()
+                    now = self.get_clock().now()
+                    poses.header.stamp = ROSClock().now().to_msg()
+                    poses.header.frame_id = "/base_link"
+
+                    poses.pose.position.z = self.init_pose[2] + request.param_a*math.sin(2 * math.pi * (1/request.time_of_move) * tp * i)
+                    poses.pose.position.y = self.init_pose[1]  + request.param_a*math.cos(2 * math.pi * (1/request.time_of_move) * tp * i )
+                    poses.pose.position.x = self.init_pose[0] + request.param_b* ((tp/request.time_of_move)* i)
+                    pose_publisher.publish(poses)
+
+                    self.count += 1
+
+                    time.sleep(tp)  
 
         response.confirmation = 'Finished interpolation'
         return response

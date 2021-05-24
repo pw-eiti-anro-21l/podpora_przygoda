@@ -20,19 +20,7 @@ class Ikin(Node):
 
 	def __init__(self):
 		super().__init__('ikin')
-		self.values = readDHfile()
-
-		# self.markerArray = MarkerArray()
-		# qos_profile1 = QoSProfile(depth=10)
-		# self.marker_pub = self.create_publisher(MarkerArray, '/marker', qos_profile1)
-		# self.marker = Marker()
-		# self.marker.header.frame_id = "base_link"
-		# self.marker.id = 0
-		# self.marker.action = Marker.DELETEALL
-		# self.markerArray.markers.append(self.marker)
-		# self.marker_pub.publish(self.markerArray)
-		self.count = 0
-		# self.MARKERS_MAX = 1000
+		self.values = loadDH()
 
 		self.subscription = self.create_subscription(
 			PoseStamped(),
@@ -49,18 +37,15 @@ class Ikin(Node):
 		self.ikin.get_logger().warn('Invalid position')
 
 
-
 	def listener_callback(self, msg):
 
-		joint1 = msg.pose.position.z
-		joint2 = msg.pose.position.y
-		joint3 = msg.pose.position.x
+		pose = msg.pose.position.x
+		pose_1 = msg.pose.position.y
+		pose_2 = msg.pose.position.z
+		
+		
 
 		dh_val = []
-		# self.marker.type = self.marker.SPHERE
-		# self.marker.action = self.marker.ADD
-		# (marker.scale.x,marker.scale.y, marker.scale.z) = (0.02, 0.02, 0.02)
-		# self.marker.color.a = 1.0
 
 		for i, mark in enumerate(self.values.keys()):
 			a, d, alpha, theta = self.values[mark]
@@ -68,9 +53,9 @@ class Ikin(Node):
 			dh_val.append(d)
 
 
-		x =  joint3 + dh_val[0]
-		y =  joint2 + dh_val[1]
-		z =  joint1 + dh_val[2]
+		pose =  pose + dh_val[0]
+		pose_1 =  pose_1 + dh_val[1]
+		pose_2 =  pose_2 + dh_val[2]
 
 		qos_profile = QoSProfile(depth=10)
 		self.joint_pub = self.create_publisher(JointState, '/joint_states', qos_profile)
@@ -78,61 +63,31 @@ class Ikin(Node):
 		now = self.get_clock().now()
 		joint_state.header.stamp = now.to_msg()
 		joint_state.name = ['base_link_1', 'link_1_2', 'link_2_3']
-		print(x)
-		print(y)
-		print(z)
+		print(pose)
+		print(pose_1)
+		print(pose_2)
 
 
-		if(  (x <= -0.5) or 
-			(y <= 0)  or
-			(z <= 0)):
+		if(  (pose <= -0.1 or pose >= 0.1) or 
+			(pose_1 <= -0.5 or pose_1 >= 1)  or
+			(pose_2 <= -0.45 or pose_2 >= 1)):
 
 			self.get_logger().warn("Invalid position")
-			joint_state.position = [float(self.last_z), float(self.last_y), float(self.last_x)]
+			joint_state.position = [float(self.last_x), float(self.last_y), float(self.last_z)]
 			
 			self.joint_pub.publish(joint_state)
 
-			# self.marker.pose.position.x = dh_val[0] + float(x)
-			# self.marker.pose.position.y = dh_val[1] + float(y)
-			# self.marker.pose.position.z = dh_val[2] + float(z)
-
-			# if(self.count > self.MARKERS_MAX):
-			# 	self.markerArray.markers.pop(0)
-		
-			# id = 0
-			# for m in self.markerArray.markers:
-			# 	m.id = id
-			# 	id += 1
-			# self.markerArray.markers.append(self.marker)
-			self.count += 1
-
-			#self.marker_pub.publish(self.markerArray)
 
 		else:
-			joint_state.position = [x, y, z]
-			self.last_x = x
-			self.last_y = y
-			self.last_z = z
+			joint_state.position = [pose, pose_1, pose_2]
+			self.last_x = pose
+			self.last_y = pose_1
+			self.last_z = pose_2
 			
 			self.joint_pub.publish(joint_state)
 
-			# self.marker.pose.position.x = dh_val[0] + float(x)
-			# self.marker.pose.position.y = dh_val[1] + float(y)
-			# self.marker.pose.position.z = dh_val[2] + float(z)
 
-			# if(self.count > self.MARKERS_MAX):
-			# 	self.markerArray.markers.pop(0)
-		
-			# id = 0
-			# for m in self.markerArray.markers:
-			# 	m.id = id
-			# 	id += 1
-			# self.markerArray.markers.append(self.marker)
-			self.count += 1
-
-			#self.marker_pub.publish(self.markerArray)
-
-def readDHfile():
+def loadDH():
 
     with open(os.path.join(
         get_package_share_directory('lab5'),'DH.json'), 'r') as file:
