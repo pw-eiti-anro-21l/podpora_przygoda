@@ -16,29 +16,24 @@ class oint(Node):
 
     def send_request(self):
         try:
-            self.req.initial_x = float(sys.argv[1])
-            self.req.initial_y = float(sys.argv[2])
-            self.req.initial_z = float(sys.argv[3])
+            self.req.param_a= float(sys.argv[1])
+            self.req.param_b = float(sys.argv[2])     
+
+            self.req.type = sys.argv[3]       
+            
             self.req.time_of_move = float(sys.argv[4])
 
-            self.req.type = sys.argv[5] 
-
-            self.req.param_a= float(sys.argv[6])
-            self.req.param_b = float(sys.argv[7])
-            
 
         except ValueError:
             print("ValeuError while parsing")
 
-            self.req.initial_x = 1
-            self.req.initial_y = 1
-            self.req.initial_z = 1
-            self.req.time_of_move = 1
-
-            self.req.type = (sys.argv[5]) 
-
             self.req.param_a = 1
             self.req.param_b = 1
+
+            self.req.type = (sys.argv[3]) 
+
+            self.req.time_of_move = 1
+            
             
         self.future = self.cli.call_async(self.req)
 
