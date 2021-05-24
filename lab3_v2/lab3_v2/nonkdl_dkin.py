@@ -21,10 +21,11 @@ class NONKDL_DKIN(Node):
 
         self.subscription = self.create_subscription(JointState, 'joint_states', self.listener_callback, 10)
         self.subscription
+        with open('DH.json', 'r') as file:
+            self.params = json.loads(file.read())
+        
 
     def listener_callback(self, msg):
-        with open('DH.json', 'r') as file:
-            params = json.loads(file.read())
 
         i = 1
         T = []
